@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antes de partilhar, verifica — Verificador de Notícias</title>
+<meta name="description" content="Projeto escolar de literacia mediática: analisa os sinais de desinformação num texto e mostra o caminho até à fonte.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#app">Saltar para o verificador</a>
+
+<header class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <svg class="rings" viewBox="0 0 420 420" aria-hidden="true">
+    <circle cx="210" cy="210" r="70"/>
+    <circle cx="210" cy="210" r="120"/>
+    <circle cx="210" cy="210" r="160"/>
+    <circle class="dash" cx="210" cy="210" r="196"/>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <p class="eyebrow"><span class="pip" aria-hidden="true"></span> Projeto escolar · Literacia mediática</p>
+    <h1>Antes de partilhar,<br><em>verifica.</em></h1>
+    <p class="lede">Cola uma notícia, uma mensagem de WhatsApp ou uma afirmação. A app mostra os sinais que a desinformação deixa no texto — e o caminho até à fonte.</p>
+    <ul class="chips">
+      <li><b id="num-sinais">19</b> sinais no motor</li>
+      <li><b>0</b> dados enviados</li>
+      <li><b>3 min</b> para verificar</li>
+    </ul>
+  </div>
+
+  <p class="hero-note">Índice de alerta linguístico. Não é um veredicto sobre a verdade.</p>
+</header>
+
+<nav class="navbar" aria-label="Secções da aplicação">
+  <div class="wrap navwrap">
+    <div class="tabs" role="tablist">
+      <button class="tab is-active" role="tab" aria-selected="true" data-tab="texto">Verificar</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="media">Imagem e vídeo</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="como">Como funciona</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="sobre">Sobre o projeto</button>
+    </div>
+    <span class="nav-note">100% no navegador</span>
+  </div>
+</nav>
+
+<main id="app" class="wrap">
+
+  <!-- ============ VERIFICAR ============ -->
+  <section id="painel-texto" class="panel" role="tabpanel" aria-label="Verificar texto">
+
+    <form id="form" class="card form" autocomplete="off">
+      <div class="form-head">
+        <h2 class="eyebrow-2">Passo 1 — o texto</h2>
+        <p class="form-sub">Copia a mensagem como a recebeste. Quanto mais completa, melhor a análise.</p>
+      </div>
+
+      <label class="sr" for="conteudo">Texto a analisar</label>
+      <textarea id="conteudo" rows="9" placeholder="Ex.: URGENTE!!! PARTILHE ANTES QUE APAGUEM! Especialistas alertam que…"></textarea>
+      <div class="counter"><span id="contador">0 palavras</span><span>Ctrl + Enter para analisar</span></div>
+
+      <div class="row">
+        <label class="field grow" for="fonte">
+          <span class="label">Ligação da fonte <em>(opcional)</em></span>
+          <input id="fonte" type="url" placeholder="https://…">
+        </label>
+        <label class="field grow" for="origem">
+          <span class="label">Onde a recebeste <em>(opcional)</em></span>
+          <select id="origem">
+            <option value="">—</option>
+            <option>WhatsApp / grupo</option>
+            <option>Facebook</option>
+            <option>Instagram / TikTok</option>
+            <option>Email</option>
+            <option>Site de notícias</option>
+            <option>Boca a boca</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn primary">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+          Analisar
+        </button>
+        <button type="button" class="chip-btn risk" id="exemplo-mau"><span class="dot"></span>Exemplo suspeito</button>
+        <button type="button" class="chip-btn safe" id="exemplo-bom"><span class="dot"></span>Exemplo sólido</button>
+        <button type="button" class="btn ghost" id="limpar">Limpar</button>
+      </div>
+    </form>
+
+    <section id="resultado" class="hidden" aria-live="polite" aria-label="Resultado da análise"></section>
+  </section>
+
+  <!-- ============ MEDIA ============ -->
+  <section id="painel-media" class="panel hidden" role="tabpanel" aria-label="Imagem e vídeo">
+    <div class="card">
+      <p class="eyebrow-2">Passo 2 — quando não há texto</p>
+      <h2 class="big">Imagem ou vídeo, em três minutos</h2>
+      <p class="lead">Nenhum analisador vê um vídeo e diz «é falso» com fiabilidade. Mas há verificações rápidas que resolvem a maioria dos casos — e a mais forte de todas é falar com a pessoa por outro canal.</p>
+
+      <ol class="steps">
+        <li>
+          <h3>Pesquisa a imagem ao contrário</h3>
+          <p>Se a fotografia foi publicada três anos antes, noutro país, o que é falso é o contexto — não a imagem.</p>
+        </li>
+        <li>
+          <h3>Procura o original, não o recorte</h3>
+          <p>Um excerto sem princípio nem fim é desenhado para não ser verificável. Pede o vídeo completo e a origem.</p>
+        </li>
+        <li>
+          <h3>Olha para onde a IA falha</h3>
+          <p>Mãos e dedos, dentes, brincos e óculos que se desfazem, fundo que ondula, pestanejar estranho, lábios desalinhados do som.</p>
+        </li>
+        <li>
+          <h3>Ouve com atenção</h3>
+          <p>Voz sintética raramente respira, hesita ou se interrompe. Fala sempre ao mesmo ritmo.</p>
+        </li>
+        <li>
+          <h3>Confirma por outro canal</h3>
+          <p>Se é a voz de um familiar a pedir dinheiro, liga para o número que já tens. Uma chamada desfaz o golpe.</p>
+        </li>
+      </ol>
+
+      <div class="linkgrid">
+        <a href="https://images.google.com/" target="_blank" rel="noopener">Pesquisa inversa · Google</a>
+        <a href="https://tineye.com/" target="_blank" rel="noopener">Pesquisa inversa · TinEye</a>
+        <a href="https://yandex.com/images/" target="_blank" rel="noopener">Pesquisa inversa · Yandex</a>
+        <a href="https://toolbox.google.com/factcheck/explorer" target="_blank" rel="noopener">Fact Check Explorer</a>
+        <a href="https://poligrafo.sapo.pt/" target="_blank" rel="noopener">Polígrafo</a>
+        <a href="https://www.edmo.eu/" target="_blank" rel="noopener">EDMO</a>
+      </div>
+
+      <p class="note">Desde 2 de agosto de 2026, o Regulamento Europeu da IA obriga a identificar áudio e vídeo manipulados por IA. A falta de rótulo não prova má-fé, mas num vídeo «bombástico» é razão para desconfiar.</p>
+    </div>
+  </section>
+
+  <!-- ============ COMO FUNCIONA ============ -->
+  <section id="painel-como" class="panel hidden" role="tabpanel" aria-label="Como funciona">
+    <div class="card">
+      <p class="eyebrow-2">Método</p>
+      <h2 class="big">O que o algoritmo faz — e o que não faz</h2>
+      <p class="lead">Não existe um algoritmo que leia um texto e saiba se é verdade. A verdade de uma afirmação está no mundo — documentos, dados, testemunhas — não na sua pontuação. O que existe, e é útil, é um conjunto de marcas que a desinformação usa de forma recorrente. Esta app procura essas marcas, soma os pesos e mostra-as uma a uma, para que possas discordar dela.</p>
+
+      <div class="stats">
+        <div><b>12</b><span>pontos de partida</span></div>
+        <div><b id="num-risco">16</b><span>sinais de alarme</span></div>
+        <div><b id="num-safe">3</b><span>sinais a favor</span></div>
+      </div>
+
+      <h3 class="h3">Como a pontuação é calculada</h3>
+      <p>Cada sinal detetado soma — ou subtrai — pontos a uma base de <strong>12</strong>. O resultado é limitado entre 0 e 100. É um <em>índice de alerta</em>, não uma probabilidade de falsidade: dois textos com a mesma pontuação podem ter fiabilidade completamente diferente.</p>
+
+      <div class="tablewrap">
+        <table class="pesos">
+          <thead><tr><th>Sinal</th><th>Peso</th><th>Porque conta</th></tr></thead>
+          <tbody id="tabela-pesos"></tbody>
+        </table>
+      </div>
+
+      <h3 class="h3">Limites, ditos sem rodeios</h3>
+      <ul class="limits">
+        <li>Um texto bem escrito e sem fontes pode pontuar baixo e ser falso.</li>
+        <li>Um texto verdadeiro, mal escrito e indignado, pontua alto. Indignação não é prova de nada.</li>
+        <li>A app não acede à internet, não vê imagens e não sabe quem publicou.</li>
+        <li>Os sinais são o início da verificação, nunca o fim.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE ============ -->
+  <section id="painel-sobre" class="panel hidden" role="tabpanel" aria-label="Sobre o projeto">
+    <div class="card">
+      <p class="eyebrow-2">Projeto escolar</p>
+      <h2 class="big">Sobre este trabalho</h2>
+      <p class="lead">A pergunta de partida: <em>como pode uma pessoa sem formação em jornalismo decidir, em dois minutos, se deve partilhar uma mensagem?</em></p>
+
+      <div class="about-grid">
+        <div>
+          <h3 class="h3">Objetivos</h3>
+          <ul class="ticks">
+            <li>Identificar os padrões linguísticos mais frequentes na desinformação.</li>
+            <li>Traduzir esses padrões em indicadores que um programa consegue medir.</li>
+            <li>Construir uma ferramenta simples, privada e utilizável no telemóvel.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="h3">Como foi feito</h3>
+          <ol class="mini-steps">
+            <li>Levantamento de padrões em literatura de literacia mediática e em relatórios de verificadores.</li>
+            <li>Definição de indicadores com pesos justificados e testáveis por código.</li>
+            <li>Implementação em JavaScript puro, sem bibliotecas nem servidor.</li>
+            <li>Testes automáticos ao motor de análise.</li>
+            <li>Desenho de interface acessível e responsiva.</li>
+          </ol>
+        </div>
+      </div>
+
+      <h3 class="h3">Decisões de desenho</h3>
+      <ul class="limits">
+        <li><strong>Sem IA generativa.</strong> Uma ferramenta que responde «é falso» com confiança é o problema, não a solução.</li>
+        <li><strong>Mostrar o excerto.</strong> Cada sinal indica a passagem que o acionou, para poder ser contestado.</li>
+        <li><strong>Contar também o que ajuda.</strong> Fontes, datas e documentos baixam a pontuação: verificar não é desconfiar de tudo.</li>
+        <li><strong>Não recolher nada.</strong> O texto nunca sai do dispositivo, o que torna a ferramenta utilizável com informação pessoal.</li>
+      </ul>
+
+      <h3 class="h3">Referências</h3>
+      <ul class="refs">
+        <li>Regulamento (UE) 2024/1689 — Regulamento da Inteligência Artificial, art. 50.º (transparência e rotulagem de deepfakes).</li>
+        <li>Regulamento (UE) 2022/2065 — Regulamento dos Serviços Digitais.</li>
+        <li>Diretiva (UE) 2024/1385 — combate à violência contra as mulheres, art. 5.º (imagens sexuais manipuladas).</li>
+        <li>EDMO — Observatório Europeu dos Media Digitais; Polígrafo (verificação de factos em Portugal).</li>
+      </ul>
+
+      <div class="ficha">
+        <h3 class="h3">Ficha</h3>
+        <p>Nome · Turma · Disciplina<br>Escola · Ano letivo</p>
+        <p class="muted small">Substitui esta linha pelos teus dados antes de entregar.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><strong>Verificador de Notícias</strong> — projeto escolar de literacia mediática. Não é um verificador de factos profissional nem aconselhamento jurídico. Quando a informação importa, vai à fonte primária.</p>
+  </div>
+</footer>
+
+<script src="core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
